@@ -1,3 +1,5 @@
+// Run by `npm version` (see package.json "version" script) to keep manifest.json
+// and versions.json in sync with the version npm just bumped package.json to.
 import { readFileSync, writeFileSync } from 'fs';
 
 const targetVersion = process.env.npm_package_version;
@@ -12,6 +14,6 @@ writeFileSync('manifest.json', JSON.stringify(manifest, null, '\t'));
 // but only if the target version is not already in versions.json
 const versions = JSON.parse(readFileSync('versions.json', 'utf8'));
 if (!(targetVersion in versions)) {
-	versions[targetVersion] = minAppVersion;
-	writeFileSync('versions.json', JSON.stringify(versions, null, '\t'));
+  versions[targetVersion] = minAppVersion;
+  writeFileSync('versions.json', JSON.stringify(versions, null, '\t'));
 }
